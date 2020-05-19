@@ -1,7 +1,5 @@
-/* scanner for a toy Pascal-like language */
 %option noyywrap
 %{
-/* need this for the call to atof() below */
 #include <math.h>
 %}
 DIGIT [0-9]
@@ -40,13 +38,13 @@ printf( "A RIGHT PARANTHESES: %s\n", yytext );
 }
 {ID} printf( "An identifier: %s\n", yytext );
 "+"|"-"|"*"|"/"|"=" printf( "An operator: %s\n", yytext );
-"{"[\^{}}\n]*"}" /* eat up one-line comments */
-[ \t\n]+ /* eat up whitespace */
+"{"[\^{}}\n]*"}" 
+[ \t\n]+ 
 . printf( "Unrecognized character: %s\n", yytext );
 %%
 int main( int argc, char **argv )
 {
-++argv, --argc; /* skip over program name */
+++argv, --argc; 
 if ( argc > 0 )
 yyin = fopen( argv[0], "r" );
 else
